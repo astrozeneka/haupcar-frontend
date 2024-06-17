@@ -23,6 +23,7 @@ const CarInsertComponent = () => {
         setCar(updatedCar)
     }
     let onFormSubmit = (e) => {
+        e.preventDefault()
         console.log('Form submitted')
         axios.post('http://localhost:8000/api/cars', car, {
             headers: {
@@ -40,7 +41,6 @@ const CarInsertComponent = () => {
             }
         })
 
-        e.preventDefault()
     }
     return (
         <CarViewComponent car={car} onCarChange={onCarChange} onSubmit={onFormSubmit} displayedErrors={displayedErrors}/>

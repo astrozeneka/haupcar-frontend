@@ -39,6 +39,50 @@ const CarCollectionComponent = () => {
         }, 1500)
     }
 
+    const handleDownloadDocument = (id) => {
+        console.log("Click handler")
+        axios.get('http://localhost:8000/api/cars/' + id, {
+            headers: {
+                'Authorization': 'Bearer ' + token,
+            }
+        }).then((response) => {
+            if (response.status === 200){
+                let entityDocument = response.data.document
+                // Trigger download
+                let link = document.createElement('a')
+                link.href = entityDocument
+                let filetype = entityDocument.split(';')[0].split(':')[1]
+                let fileExtension = filetype.split('/')[1]
+                link.download = `document-${id}.${fileExtension}`
+                document.body.appendChild(link)
+                link.click()
+                document.body.removeChild(link)
+            }
+        })
+    }
+
+    const handleDownloadImage = (id) => {
+        console.log("Click handler")
+        axios.get('http://localhost:8000/api/cars/' + id, {
+            headers: {
+                'Authorization': 'Bearer ' + token,
+            }
+        }).then((response) => {
+            if (response.status === 200){
+                let entityImage = response.data.image
+                // Trigger download
+                let link = document.createElement('a')
+                link.href = entityImage
+                let filetype = entityImage.split(';')[0].split(':')[1]
+                let fileExtension = filetype.split('/')[1]
+                link.download = `image-${id}.${fileExtension}`
+                document.body.appendChild(link)
+                link.click()
+                document.body.removeChild(link)
+            }
+        })
+    }
+
 
 
     const handleLogoutClick = () => {
@@ -91,8 +135,24 @@ const CarCollectionComponent = () => {
                                 <td>{entity.model}</td>
                                 <td>{entity.registrationNumber}</td>
                                 <td>{entity.notes}</td>
-                                <td>Download file</td>
-                                <td>Download image</td>
+                                <td>
+                                    { (entity.hasDocument) ? (
+                                        <button className="btn btn-primary btn-sm"
+                                                onClick={() => handleDownloadDocument(entity.id)}
+                                        >
+                                            Download
+                                        </button>
+                                    ) : ''}
+                                </td>
+                                <td>
+                                    { (entity.hasImage) ? (
+                                        <button className="btn btn-primary btn-sm"
+                                                onClick={() => handleDownloadImage(entity.id)}
+                                        >
+                                            Download
+                                        </button>
+                                    ) : ''}
+                                </td>
                                 <td>
                                     <a href={`/cars/edit/${entity.id}`}>Edit</a> | <a href={`/cars/delete/${entity.id}`}>Delete</a>
                                 </td>

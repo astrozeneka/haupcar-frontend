@@ -34,6 +34,7 @@ const CarEditComponent = () => {
     }, [])
 
     const onFormSubmit = (e) => {
+        e.preventDefault()
         axios.put(`http://localhost:8000/api/cars/${id}`, entity, {
             headers: {
                 'Authorization': `Bearer ${getToken()}`

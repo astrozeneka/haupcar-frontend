@@ -30,6 +30,7 @@ const FileUploadComponent = ({label, value, onChange}) => {
         link.download = label + "." + fileExtension
         document.body.appendChild(link)
         link.click()
+        document.body.removeChild(link)
     }
     return (
         <div>
