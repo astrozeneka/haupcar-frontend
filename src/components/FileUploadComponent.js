@@ -1,10 +1,10 @@
 
-/*
-    น่าจะไม่ต้องใช้
- */
-import React, {useState} from 'react';
 
-const FileUploadComponent = ({name, label, value, onChange}) => {
+import React, {useState} from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {faDownload, faFileDownload} from "@fortawesome/free-solid-svg-icons";
+
+const FileUploadComponent = ({name, label, value, onChange, preview}) => {
 
     const handleFileInputChange = (e) => {
         let file = e.target.files[0]
@@ -36,10 +36,17 @@ const FileUploadComponent = ({name, label, value, onChange}) => {
         <div>
             <label>
                 { label }
-                {(value !== null && value !== undefined) ? (<a href="#" onClick={downloadFile}>Download</a>) : ''}
+                {(value !== null && value !== undefined) ? (
+                    <button className="btn btn-primary btn-sm mx-3" onClick={downloadFile}>
+                        <FontAwesomeIcon icon={faDownload} className="mx-1"/>
+                        Download
+                    </button>
+                ) : ''}
             </label>
-
-            <input type="file" className="form-control" onChange={handleFileInputChange}/>
+            { preview ? (<div>
+                <img src={value} className="img-thumbnail" alt="Preview" style={{maxWidth: "200px"}}/>
+            </div>) : null }
+            <input type="file" className="form-control my-2" onChange={handleFileInputChange}/>
         </div>
     )
 }

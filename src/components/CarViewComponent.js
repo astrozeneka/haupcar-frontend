@@ -50,7 +50,9 @@ const CarViewComponent = ({ car, onCarChange, onSubmit, displayedErrors }) => {
                             <div className="form-group">
                                 <FileUploadComponent name="image"
                                                      label="Car image"
-                                                     value={car.image} onChange={handleInputChange} />
+                                                     value={car.image} onChange={handleInputChange}
+                                                     preview={true}
+                                />
                             </div>
 
                             <div className="my-2">
