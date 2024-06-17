@@ -1,5 +1,7 @@
 import React from "react";
 import FileUploadComponent from "./FileUploadComponent";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faArrowLeft} from "@fortawesome/free-solid-svg-icons";
 
 const CarViewComponent = ({ car, onCarChange, onSubmit, displayedErrors }) => {
     const handleInputChange = (e) => {
@@ -16,6 +18,10 @@ const CarViewComponent = ({ car, onCarChange, onSubmit, displayedErrors }) => {
                         <p className="text-center">Please Insert the car information</p>
                     </div>
                     <div className="card-body">
+                        <a className="btn btn-secondary" href="/cars">
+                            <FontAwesomeIcon icon={faArrowLeft} className="mx-1"/>
+                            Back
+                        </a>
                         <form action="#" onSubmit={onSubmit}>
                             <div className="form-group">
                                 <label>Brand</label>

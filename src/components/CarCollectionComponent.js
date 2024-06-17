@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import { setToken, getToken, removeToken } from "../utils/auth";
-import { Navigate } from 'react-router-dom';
+import {Navigate, useSearchParams} from 'react-router-dom';
 import axios from "axios";
 import {getFeedback, removeFeedback} from "../utils/feedback";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -8,12 +8,20 @@ import {faDownload} from "@fortawesome/free-solid-svg-icons";
 
 const CarCollectionComponent = () => {
     const [entityList, setEntityList] = useState([])
+    const [pageCount, setPageCount] = useState(0)
+    const [activePage, setActivePage] = useState(1)
+    const [searchParams] = useSearchParams();
 
     // Load the data from the API
     useEffect(()=>{
         const fetchData = async () => {
             try {
-                const response = await axios.get('http://localhost:8000/api/cars/', {
+                // get the parameter from the GET parameter
+                const page = parseInt(searchParams.get('page')) || 1
+                setActivePage(page)
+                let offset = (page - 1) * 10
+
+                const response = await axios.get('http://localhost:8000/api/cars/?offset=' + offset, {
                     headers: {
                         'Authorization': `Bearer ${token}`
                     }
@@ -21,7 +29,8 @@ const CarCollectionComponent = () => {
                 if (response.status === 403) {
                     console.error('Invalid JWT token')
                 }
-                setEntityList(response.data);
+                setEntityList(response.data.data);
+                setPageCount(Math.ceil(response.data.count / 10))
             } catch (e) {
                 console.error(e);
             }
@@ -165,6 +174,38 @@ const CarCollectionComponent = () => {
                     })}
                     </tbody>
                 </table>
+
+                <div className="d-flex justify-content-center">
+                    <nav aria-label="Page navigation example">
+                        <ul className="pagination">
+                            { activePage > 1 ? (
+                                <li className="page-item"><a className="page-link"
+                                                             href={'/cars?page=' + (activePage - 1)}>Previous</a></li>
+                            ) : (
+                                <li className="page-item"><span className="page-link disabled">Previous</span></li>
+                            )}
+
+                            {Array.from({length: pageCount}, (_, i) => {
+                                return (
+                                    <li className="page-item" key={i}>
+                                        {activePage === i+1 ? (
+                                            <span className="page-link active">{i + 1}</span>
+                                        ) : (
+                                            <a className="page-link" href={`/cars?page=${i + 1}`}>{i + 1}</a>
+                                        )}
+
+                                    </li>
+                                )
+                            })}
+                            { activePage < pageCount ? (
+                                <li className="page-item"><a className="page-link" href={'/cars?page=' + (activePage + 1)}>Next</a></li>
+                            ) : (
+                                <li className="page-item"><span className="page-link disabled">Next</span></li>
+                            )}
+
+                        </ul>
+                    </nav>
+                </div>
             </div>
         </div>
 )
