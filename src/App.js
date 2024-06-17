@@ -10,6 +10,7 @@ import {
     Routes,
 } from "react-router-dom";
 import CarEditComponent from "./components/CarEditComponent";
+import DeletePromptComponent from "./components/DeletePromptComponent";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
 
                 <Route path="/cars/new" element={<CarInsertComponent />} />
                 <Route path="/cars/edit/:id" element={<CarEditComponent />} />
+                <Route path="/cars/delete/:id" element={<DeletePromptComponent />} />
             </Routes>
         </div>
       </Router>

@@ -16,3 +16,11 @@ code {
     padding-bottom: .2em;
     padding-top: .2em;
 }
+
+.prompt-footer{
+    text-align: center;
+}
+
+.prompt-footer button{
+    margin: .3em;
+}

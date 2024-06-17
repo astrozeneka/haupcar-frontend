@@ -36,7 +36,7 @@ const CarCollectionComponent = () => {
     if (feedback.message) {
         setTimeout(() => {
             removeFeedback()
-        }, 5000)
+        }, 1500)
     }
 
 
@@ -94,7 +94,7 @@ const CarCollectionComponent = () => {
                                 <td>Download file</td>
                                 <td>Download image</td>
                                 <td>
-                                    <a href={`/cars/edit/${entity.id}`}>Edit</a> | <a href={`/delete/${entity.id}`}>Delete</a>
+                                    <a href={`/cars/edit/${entity.id}`}>Edit</a> | <a href={`/cars/delete/${entity.id}`}>Delete</a>
                                 </td>
                             </tr>
                         )
