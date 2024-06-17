@@ -10,6 +10,11 @@ const CarEditComponent = () => {
     let url = window.location.pathname.split('/')
     let id = url[url.length - 1]
     const [ entity, setEntity ] = useState(null)
+    let [displayedErrors, setDisplayedErrors] = useState({
+        brand: '',
+        model: '',
+        registrationNumber: '',
+    })
     useEffect(()=>{
         const fetchData = async ()=> {
             axios.get(`http://localhost:8000/api/cars/${id}`, {
@@ -20,6 +25,9 @@ const CarEditComponent = () => {
                 setEntity(response.data)
             }).catch((error) => {
                 console.error(error)
+                if (error.response.status === 422) {
+                    setDisplayedErrors(error.response.data)
+                }
             })
         }
         fetchData()
@@ -37,12 +45,17 @@ const CarEditComponent = () => {
             }
         }).catch((error) => {
             console.error(error)
+            if (error.response.status === 422) {
+                setDisplayedErrors(error.response.data)
+            }
         })
     }
 
     return (
         (entity !== null) ? (
-        <CarViewComponent car={entity} onCarChange={setEntity} onSubmit={onFormSubmit}/>
+        <CarViewComponent car={entity} onCarChange={setEntity} onSubmit={onFormSubmit}
+            displayedErrors={displayedErrors}
+        />
         ) : null
     )
 }

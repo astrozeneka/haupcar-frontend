@@ -12,6 +12,12 @@ const CarInsertComponent = () => {
         registrationNumber: '',
         notes: ''
     })
+    let [displayedErrors, setDisplayedErrors] = useState({
+        brand: '',
+        model: '',
+        registrationNumber: '',
+    })
+
     const onCarChange = (updatedCar) => {
         console.log(updatedCar)
         setCar(updatedCar)
@@ -29,12 +35,15 @@ const CarInsertComponent = () => {
             }
         }).catch((error) => {
             console.error(error)
+            if (error.response.status === 422) {
+                setDisplayedErrors(error.response.data)
+            }
         })
 
         e.preventDefault()
     }
     return (
-        <CarViewComponent car={car} onCarChange={onCarChange} onSubmit={onFormSubmit}/>
+        <CarViewComponent car={car} onCarChange={onCarChange} onSubmit={onFormSubmit} displayedErrors={displayedErrors}/>
     )
 }
 
