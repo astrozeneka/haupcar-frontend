@@ -7,8 +7,10 @@ import {setFeedback} from "../utils/feedback";
 
 const CarInsertComponent = () => {
     let [car, setCar] = useState({
-        brand: 'Volkswagen',
-        model: ''
+        brand: '',
+        model: '',
+        registrationNumber: '',
+        notes: ''
     })
     const onCarChange = (updatedCar) => {
         console.log(updatedCar)

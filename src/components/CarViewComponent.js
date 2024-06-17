@@ -1,4 +1,5 @@
 import React from "react";
+import FileUploadComponent from "./FileUploadComponent";
 
 const CarViewComponent = ({ car, onCarChange, onSubmit }) => {
     const handleInputChange = (e) => {
@@ -35,6 +36,12 @@ const CarViewComponent = ({ car, onCarChange, onSubmit }) => {
                                 <label>Notes</label>
                                 <textarea className="form-control" name="notes"
                                     value={car.notes} onChange={handleInputChange}/>
+                            </div>
+
+                            <div className="form-group">
+                                <FileUploadComponent name="documents"
+                                                     label="Car documents"
+                                    value={car.document} onChange={handleInputChange}/>
                             </div>
 
                             <div className="my-2">
