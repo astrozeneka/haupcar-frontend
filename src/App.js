@@ -2,29 +2,24 @@ import logo from './logo.svg';
 import './App.css';
 import React from "react";
 import LoginComponent from "./components/LoginComponent";
+import CarCollection from "./components/CarCollection";
+import {
+    BrowserRouter as Router,
+    Route,
+    Routes,
+} from "react-router-dom";
 
 function App() {
   return (
-    <div className="App container">
-        <LoginComponent></LoginComponent>
-
-
-          {/*
-      <header className="App-header">
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-        */}
-    </div>
+      <Router>
+        <div className="App">
+            <Routes>
+                <Route path="/" element={<CarCollection />} />
+                <Route path="/login" element={<LoginComponent />} />
+                <Route path="/cars" element={<CarCollection />} />
+            </Routes>
+        </div>
+      </Router>
   );
 }
 

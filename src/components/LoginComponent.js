@@ -33,34 +33,36 @@ const LoginComponent = () => {
     }
 
     return (
-        <div className="centerVertically">
-            <div className="card">
-                <div className="card-header">
-                    <h2 className="text-center pt-3">HAUPCAR</h2>
-                    <p className="text-center">Login to the Car Management System</p>
-                </div>
-                <div className="card-body">
-                    <form action="#">
-                        <div className="form-group">
-                            <label>Username</label>
-                            <input type="text" className="form-control" value={username}
-                                   onChange={handleUsernameChange}/>
-                        </div>
-                        <br/>
-                        <div className="form-group">
-                            <label>Password</label>
-                            <input type="password" className="form-control" value={password}
-                                   onChange={handlePasswordChange}/>
-                        </div>
-                        <br/>
-                        { errorMessage ? (<div className="alert alert-danger">
-                            { errorMessage }
-                        </div>) : null }
-                        <button className="btn btn-primary" onClick={handleLogin}>Login</button>
-                    </form>
+        <div className="container">
+            <div className="centerVertically">
+                <div className="card">
+                    <div className="card-header">
+                        <h2 className="text-center pt-3">HAUPCAR</h2>
+                        <p className="text-center">Login to the Car Management System</p>
+                    </div>
+                    <div className="card-body">
+                        <form action="#">
+                            <div className="form-group">
+                                <label>Username</label>
+                                <input type="text" className="form-control" value={username}
+                                       onChange={handleUsernameChange}/>
+                            </div>
+                            <br/>
+                            <div className="form-group">
+                                <label>Password</label>
+                                <input type="password" className="form-control" value={password}
+                                       onChange={handlePasswordChange}/>
+                            </div>
+                            <br/>
+                            { errorMessage ? (<div className="alert alert-danger">
+                                { errorMessage }
+                            </div>) : null }
+                            <button className="btn btn-primary" onClick={handleLogin}>Login</button>
+                        </form>
+                    </div>
                 </div>
             </div>
-    </div>
+        </div>
     );
 }
 export default LoginComponent;
