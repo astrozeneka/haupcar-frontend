@@ -11,6 +11,7 @@ const CarCollectionComponent = () => {
     const [pageCount, setPageCount] = useState(0)
     const [activePage, setActivePage] = useState(1)
     const [searchParams] = useSearchParams();
+    const [q, setQ] = useState('')
 
     // Load the data from the API
     useEffect(()=>{
@@ -20,8 +21,10 @@ const CarCollectionComponent = () => {
                 const page = parseInt(searchParams.get('page')) || 1
                 setActivePage(page)
                 let offset = (page - 1) * 10
+                let searchQuery = searchParams.get('q') || null
+                let url = (searchQuery) ? `http://localhost:8000/api/cars?q=${searchQuery}&offset=${offset}` : `http://localhost:8000/api/cars?offset=${offset}`
 
-                const response = await axios.get('http://localhost:8000/api/cars/?offset=' + offset, {
+                const response = await axios.get(url, {
                     headers: {
                         'Authorization': `Bearer ${token}`
                     }
@@ -94,6 +97,20 @@ const CarCollectionComponent = () => {
         })
     }
 
+    const handleSearchUpdate = (e) => {
+        setQ(e.target.value)
+    }
+
+    const handleKeyDown = (e) => {
+        if (e.key === 'Enter') {
+            runSearch()
+        }
+    }
+
+    const runSearch = () => {
+        window.location.href = '/cars?q=' + q
+    }
+
 
 
     const handleLogoutClick = () => {
@@ -115,15 +132,30 @@ const CarCollectionComponent = () => {
             </nav>
 
             <div className="my-3 container">
-                <a className="btn btn-primary" href="/cars/new">
-                    Add a new car
-                </a>
+                <div className="row">
+                    <div className="col-auto">
+                        <a className="btn btn-primary" href="/cars/new">
+                            Add a new car
+                        </a>
+                    </div>
+                    <div className="col-auto">
+                        <div className="row justify-content-center">
+                            <div className="col-auto">
+                                <input type="text" className="form-control mr-2" placeholder="Search" value={q}
+                                       onChange={handleSearchUpdate} onKeyDown={handleKeyDown}/>
+                            </div>
+                            <div className="col-auto">
+                                <button type="submit" className="btn btn-primary" onClick={runSearch}>Search</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <div className="container">
-                { feedback.message ? (<div className="alert alert-success">
-                    { feedback.message }
-                </div>) : '' }
+                {feedback.message ? (<div className="alert alert-success">
+                    {feedback.message}
+                </div>) : ''}
                 <table className="table">
                     <thead>
                     <tr>
