@@ -3,6 +3,8 @@ import { setToken, getToken, removeToken } from "../utils/auth";
 import { Navigate } from 'react-router-dom';
 import axios from "axios";
 import {getFeedback, removeFeedback} from "../utils/feedback";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {faDownload} from "@fortawesome/free-solid-svg-icons";
 
 const CarCollectionComponent = () => {
     const [entityList, setEntityList] = useState([])
@@ -140,15 +142,17 @@ const CarCollectionComponent = () => {
                                         <button className="btn btn-primary btn-sm"
                                                 onClick={() => handleDownloadDocument(entity.id)}
                                         >
+                                            <FontAwesomeIcon icon={faDownload} />
                                             Download
                                         </button>
                                     ) : ''}
                                 </td>
                                 <td>
                                     { (entity.hasImage) ? (
-                                        <button className="btn btn-primary btn-sm"
+                                        <button className="btn btn-warning btn-sm"
                                                 onClick={() => handleDownloadImage(entity.id)}
                                         >
+                                            <FontAwesomeIcon icon={faDownload} />
                                             Download
                                         </button>
                                     ) : ''}

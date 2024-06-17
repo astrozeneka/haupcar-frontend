@@ -4,7 +4,7 @@
  */
 import React, {useState} from 'react';
 
-const FileUploadComponent = ({label, value, onChange}) => {
+const FileUploadComponent = ({name, label, value, onChange}) => {
 
     const handleFileInputChange = (e) => {
         let file = e.target.files[0]
@@ -13,7 +13,7 @@ const FileUploadComponent = ({label, value, onChange}) => {
             let fileData = e.target.result
             onChange({
                 target: {
-                    name: 'document',
+                    name: name,
                     value: fileData
                 }
             });
