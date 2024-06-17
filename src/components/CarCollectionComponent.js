@@ -2,8 +2,9 @@ import React, {useEffect, useState} from 'react';
 import { setToken, getToken, removeToken } from "../utils/auth";
 import { Navigate } from 'react-router-dom';
 import axios from "axios";
+import {getFeedback, removeFeedback} from "../utils/feedback";
 
-const CarCollection = () => {
+const CarCollectionComponent = () => {
     const [entityList, setEntityList] = useState([])
 
     // Load the data from the API
@@ -31,6 +32,13 @@ const CarCollection = () => {
         return <Navigate to="/login" />
     }
 
+    let feedback = getFeedback()
+    if (feedback.message) {
+        setTimeout(() => {
+            removeFeedback()
+        }, 5000)
+    }
+
 
 
     const handleLogoutClick = () => {
@@ -52,12 +60,15 @@ const CarCollection = () => {
             </nav>
 
             <div className="my-3 container">
-                <button className="btn btn-primary">
+                <a className="btn btn-primary" href="/cars/new">
                     Add a new car
-                </button>
+                </a>
             </div>
 
             <div className="container">
+                { feedback.message ? (<div className="alert alert-success">
+                    { feedback.message }
+                </div>) : '' }
                 <table className="table">
                     <thead>
                     <tr>
@@ -95,4 +106,4 @@ const CarCollection = () => {
 )
 }
 
-export default CarCollection;
+export default CarCollectionComponent;

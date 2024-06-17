@@ -2,7 +2,8 @@ import logo from './logo.svg';
 import './App.css';
 import React from "react";
 import LoginComponent from "./components/LoginComponent";
-import CarCollection from "./components/CarCollection";
+import CarCollectionComponent from "./components/CarCollectionComponent";
+import CarInsertComponent from "./components/CarInsertComponent";
 import {
     BrowserRouter as Router,
     Route,
@@ -14,9 +15,11 @@ function App() {
       <Router>
         <div className="App">
             <Routes>
-                <Route path="/" element={<CarCollection />} />
+                <Route path="/" element={<CarCollectionComponent />} />
                 <Route path="/login" element={<LoginComponent />} />
-                <Route path="/cars" element={<CarCollection />} />
+                <Route path="/cars" element={<CarCollectionComponent />} />
+
+                <Route path="/cars/new" element={<CarInsertComponent />} />
             </Routes>
         </div>
       </Router>
