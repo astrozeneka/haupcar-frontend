@@ -43,3 +43,8 @@
   flex-direction: column;
     justify-content: center;
 }
+
+.form-group{
+    margin-top: .2em;
+    margin-bottom: .2em;
+}

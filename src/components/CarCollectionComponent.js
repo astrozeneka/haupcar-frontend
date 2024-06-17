@@ -94,7 +94,7 @@ const CarCollectionComponent = () => {
                                 <td>Download file</td>
                                 <td>Download image</td>
                                 <td>
-                                    <a href={`/edit/${entity.id}`}>Edit</a> | <a href={`/delete/${entity.id}`}>Delete</a>
+                                    <a href={`/cars/edit/${entity.id}`}>Edit</a> | <a href={`/delete/${entity.id}`}>Delete</a>
                                 </td>
                             </tr>
                         )

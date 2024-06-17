@@ -26,6 +26,16 @@ const CarViewComponent = ({ car, onCarChange, onSubmit }) => {
                                 <input type="text" className="form-control" name="model"
                                     value={car.model} onChange={handleInputChange}/>
                             </div>
+                            <div className="form-group">
+                                <label>Registration number</label>
+                                <input type="text" className="form-control" name="registrationNumber"
+                                    value={car.registrationNumber} onChange={handleInputChange}/>
+                            </div>
+                            <div className="form-group">
+                                <label>Notes</label>
+                                <textarea className="form-control" name="notes"
+                                    value={car.notes} onChange={handleInputChange}/>
+                            </div>
 
                             <div className="my-2">
                                 <button className="btn btn-primary" type="submit">Submit</button>

@@ -9,6 +9,7 @@ import {
     Route,
     Routes,
 } from "react-router-dom";
+import CarEditComponent from "./components/CarEditComponent";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
                 <Route path="/cars" element={<CarCollectionComponent />} />
 
                 <Route path="/cars/new" element={<CarInsertComponent />} />
+                <Route path="/cars/edit/:id" element={<CarEditComponent />} />
             </Routes>
         </div>
       </Router>
