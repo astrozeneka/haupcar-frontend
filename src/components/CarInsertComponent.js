@@ -4,6 +4,7 @@ import CarViewComponent from "./CarViewComponent";
 import {getToken} from "../utils/auth";
 import axios from "axios";
 import {setFeedback} from "../utils/feedback";
+import {API_URL} from "../variables";
 
 const CarInsertComponent = () => {
     let [car, setCar] = useState({
@@ -25,7 +26,7 @@ const CarInsertComponent = () => {
     let onFormSubmit = (e) => {
         e.preventDefault()
         console.log('Form submitted')
-        axios.post('http://localhost:8000/api/cars', car, {
+        axios.post(`${API_URL}/api/cars`, car, {
             headers: {
                 'Authorization': `Bearer ${getToken()}`
             }

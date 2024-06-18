@@ -1,6 +1,7 @@
 import React from 'react';
 import { useState } from "react";
 import axios from 'axios';
+import {API_URL} from "../variables";
 
 const LoginComponent = () => {
     const [username, setUsername] = useState('')
@@ -11,7 +12,7 @@ const LoginComponent = () => {
     const handlePasswordChange = (e) => { setPassword(e.target.value) }
 
     const handleLogin = async (e) => {
-        axios.post('http://localhost:8000/login', {
+        axios.post(`${API_URL}/login`, {
             username: username,
             password: password
         }).then(response => {

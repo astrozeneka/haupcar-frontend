@@ -3,6 +3,7 @@ import CarViewComponent from "./CarViewComponent";
 import {getToken} from "../utils/auth";
 import axios from "axios";
 import {setFeedback} from "../utils/feedback";
+import {API_URL} from "../variables";
 
 const CarEditComponent = () => {
     // Load the car from the server first
@@ -17,7 +18,7 @@ const CarEditComponent = () => {
     })
     useEffect(()=>{
         const fetchData = async ()=> {
-            axios.get(`http://localhost:8000/api/cars/${id}`, {
+            axios.get(`${API_URL}/api/cars/${id}`, {
                 headers: {
                     'Authorization': `Bearer ${getToken()}`
                 }
@@ -35,7 +36,7 @@ const CarEditComponent = () => {
 
     const onFormSubmit = (e) => {
         e.preventDefault()
-        axios.put(`http://localhost:8000/api/cars/${id}`, entity, {
+        axios.put(`${API_URL}/api/cars/${id}`, entity, {
             headers: {
                 'Authorization': `Bearer ${getToken()}`
             }

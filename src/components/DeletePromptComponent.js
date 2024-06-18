@@ -3,6 +3,7 @@ import { useState } from "react";
 import axios from 'axios';
 import {getToken} from "../utils/auth";
 import {setFeedback} from "../utils/feedback";
+import {API_URL} from "../variables";
 
 const DeletePromptComponent = () => {
     let url = window.location.pathname.split('/')
@@ -13,7 +14,7 @@ const DeletePromptComponent = () => {
     }
 
     const confirmDelete = () => {
-        axios.delete(`http://localhost:8000/api/cars/${id}`, {
+        axios.delete(`${API_URL}/api/cars/${id}`, {
             headers: {
                 'Authorization': `Bearer ${getToken()}`
             }

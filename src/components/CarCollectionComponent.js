@@ -5,6 +5,7 @@ import axios from "axios";
 import {getFeedback, removeFeedback} from "../utils/feedback";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faDownload} from "@fortawesome/free-solid-svg-icons";
+import {API_URL} from "../variables";
 
 const CarCollectionComponent = () => {
     const [entityList, setEntityList] = useState([])
@@ -22,7 +23,7 @@ const CarCollectionComponent = () => {
                 setActivePage(page)
                 let offset = (page - 1) * 10
                 let searchQuery = searchParams.get('q') || null
-                let url = (searchQuery) ? `http://localhost:8000/api/cars?q=${searchQuery}&offset=${offset}` : `http://localhost:8000/api/cars?offset=${offset}`
+                let url = (searchQuery) ? `${API_URL}/api/cars?q=${searchQuery}&offset=${offset}` : `${API_URL}/api/cars?offset=${offset}`
 
                 const response = await axios.get(url, {
                     headers: {
@@ -55,7 +56,7 @@ const CarCollectionComponent = () => {
 
     const handleDownloadDocument = (id) => {
         console.log("Click handler")
-        axios.get('http://localhost:8000/api/cars/' + id, {
+        axios.get(`${API_URL}/api/cars/` + id, {
             headers: {
                 'Authorization': 'Bearer ' + token,
             }
@@ -77,7 +78,7 @@ const CarCollectionComponent = () => {
 
     const handleDownloadImage = (id) => {
         console.log("Click handler")
-        axios.get('http://localhost:8000/api/cars/' + id, {
+        axios.get(`${API_URL}/api/cars/` + id, {
             headers: {
                 'Authorization': 'Bearer ' + token,
             }
